@@ -1,9 +1,7 @@
 # Default values.
 CXX ?= g++
-CXXWARNINGS ?= -Wall -Wextra -Wundef -pedantic
-CXXINTRINSICS ?= -msse2 -msse3 -mpopcnt
 CXXFEATURES ?= -funsafe-math-optimizations -fno-math-errno -std=c++11
-CXXFLAGS ?= ${CXXWARNINGS} ${CXXINTRINSICS} ${CXXFEATURES} -g -O3
+CXXFLAGS ?= -Wall -Wextra -Wundef -pedantic -g -O3 ${CXXFEATURES}
 
 # Delete this if OpenMP is not available (e.g., OS X without gcc)
 OPENMP ?= -fopenmp
@@ -13,7 +11,7 @@ CXXFLAGS += -pthread
 
 UNAME = $(shell uname)
 ifeq (${UNAME},Darwin)
-    OPENMP =
+    OPENMP = 
 endif
 
 COMPILE.cc = ${CXX} ${CXXFLAGS} ${CPPFLAGS} -c
